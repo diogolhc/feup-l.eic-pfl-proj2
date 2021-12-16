@@ -1,0 +1,4 @@
+docs/*
+!docs/README.pdf
+!docs/README.tex
+!docs/imgs
