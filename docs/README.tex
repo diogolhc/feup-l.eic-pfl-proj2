@@ -1,7 +1,9 @@
 \documentclass[a4paper,11pt,portuguese]{article}
+\usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage{enumitem}
 \usepackage[portuguese]{babel}
 
 \geometry{margin=1in}
@@ -32,7 +34,76 @@
 %%% Descrição do jogo %%%
 \section{Descrição do jogo}
 
-% TODO
+\href{https://boardgamegeek.com/boardgame/321224/breakthrough-tanks}{BreakthroughTanks}
+é um jogo de tabuleiro de estratégia por turnos. É jogado por 2 jogadores oponentes, cada 
+um controlando um conjunto de peças sobre um tabuleiro 8x8. O objetivo do jogo é ser o primeiro
+a ter uma peça na linha mais distante, ou seja, a casa do oponente. 
+
+\subsection{Peças}
+
+\noindent Existem 3 tipos de peças:
+
+\begin{enumerate}[topsep=4pt,itemsep=2pt]
+    \item \textit{Medium tank}
+    \item \textit{Heavy tank}
+    \item \textit{Tank destroyer}
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imgs/pecas.png}
+    \caption{Tipo de peças.}
+    \label{fig:pecas}
+\end{figure}
+
+\noindent Cada jogador começa com 2 \textit{heavy tanks}, 4 \textit{tank destroyers}
+e 10 \textit{medium tanks}. A sua disposição inicial no tabuleiro é a seguinte:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{imgs/board.png}
+    \caption{Disposição inicial do tabuleiro.}
+    \label{fig:board}
+\end{figure}
+
+\subsection{Movimentação simples}
+Em cada turno uma peça faz uma movimentação simples ou executa uma captura. No caso 
+da movimentação, esta é igual para todas as peças: uma unidade para a frente, ou uma 
+unidade para uma das diagonais da frente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{imgs/movement.png}
+    \caption{Movimentação.}
+    \label{fig:movemente}
+\end{figure}
+
+\subsection{Captura}
+Quando uma peça \textbf{A} captura uma peça inimiga \textbf{B}, a peça \textbf{B} é retirada do tabuleiro
+e a peça \textbf{A} passa a ocupar o lugar anteriormente ocupado por \textbf{B}. 
+
+\begin{enumerate}[topsep=4pt,itemsep=2pt]
+    \item O \textit{Medium tank} captura da mesma forma que se move.
+    \item O \textit{Heavy tank} captura 2 casas tanto para a frente 
+    como nas diagonais da frente.
+    \item O \textit{Tank destroyer} captura 2 casas para a frente.
+\end{enumerate}
+
+\noindent Neste jogo, o jogador não é obrigado a capturar caso seja possível.
+Ele pode escolher capturar, ou mover a peça em causa de forma normal, ou até
+mesmo mover outra peça.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imgs/capture.png}
+    \caption{Captura de peças.}
+    \label{fig:capture}
+\end{figure}
+
+\subsection{Fim do jogo}
+
+O jogo acaba quando um jogador consegue chegar com uma peça sua à linha mais
+afastada, ou seja, à linha mais próxima do oponente.
 
 
 %%% Lógica do jogo %%%
@@ -89,6 +160,8 @@
 %%% Bibliografia %%%
 \section{Bibliografia}
 
+%% TODO embelezar
+https://boardgamegeek.com/boardgame/321224/breakthrough-tanks
 % TODO if necessary
 
 
