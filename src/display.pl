@@ -30,14 +30,16 @@ code(-3, 'd').
 % print_number(+Number)
 % 0 => '0'
 print_number(Number):-
-    AsciiCode is 48+Number, % 48 = '0' ASCII code
+    char_code('0', ZeroAscii),
+    AsciiCode is ZeroAscii + Number,
     put_code(AsciiCode).
 
 
 % print_upper_letter(+LetterOrder)
 % 0 => 'A'
 print_upper_letter(LetterOrder):-
-    AsciiCode is 65+LetterOrder, % 65 = 'A' ASCII code
+    char_code('A', AUpperAscii),
+    AsciiCode is AUpperAscii + LetterOrder,
     put_code(AsciiCode).
 
 
