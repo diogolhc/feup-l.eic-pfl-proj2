@@ -1,20 +1,4 @@
-% get_initial_board(-Board)
-get_initial_board([
-  [ -1, -3, -3, -2, -2, -3, -3, -1],
-  [ -1, -1, -1, -1, -1, -1, -1, -1],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  1,  1,  1,  1,  1,  1,  1,  1],
-  [  1,  3,  3,  2,  2,  3,  3,  1]
-]).
-
-
-% 0: space
-% 1: Medium Tank
-% 2: Heavy Tank
-% 3: Tank destroyer
+:- consult('representation.pl'). % TODO remove after debug
 
 % TODO maybe choose more distinguished chars:
 % code(+Code, -BoardRepresentation)
@@ -28,11 +12,13 @@ code(-3, 'd').
 
 
 % print_number(+Number)
-% 0 => '0'
 print_number(Number):-
-    char_code('0', ZeroAscii),
-    AsciiCode is ZeroAscii + Number,
-    put_code(AsciiCode).
+    Number > 9,
+    write(Number).
+print_number(Number):-
+    Number < 10,
+    write(' '),
+    write(Number).
 
 
 % print_upper_letter(+LetterOrder)
@@ -45,7 +31,7 @@ print_upper_letter(LetterOrder):-
 
 % print_left_padding
 print_left_padding:-
-    write('    ').
+    write('     ').
 
 
 print_nav_horizontal(Size, Size):-
@@ -104,8 +90,8 @@ print_board([H|T], Size, CurrentLine):-
     print_board(T, Size, C1).
 
 
-% print_game(+Board)
-print_game(Board):-
+% print_board(+Board)
+print_board(Board):-
     nl,
     length(Board, Size),
     print_nav_horizontal(Size),
@@ -116,11 +102,7 @@ print_game(Board):-
 % display_game(+GameState)
 % TODO (note: GameState is not only the Board)
 
-
-% initial_state(+Size, -GameState)
-% TODO (note: GameState is not only the Board)
-
-% TODO remove once done
-test:-
-    get_initial_board(Board),
-    print_game(Board).
+% DEBUG ONLY
+test(Size):-
+    get_initial_board(Size, Board),
+    print_board(Board).
