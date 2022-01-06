@@ -114,6 +114,12 @@ print_game(Board):-
     print_nav_horizontal(Size).
 
 
+% display_game(+GameState)
+% TODO (note: GameState is not only the Board)
+
+% initial_state(+Size, -GameState)
+% TODO (note: GameState is not only the Board)
+
 % TODO remove once done
 test:-
     get_initial_board(Board),
