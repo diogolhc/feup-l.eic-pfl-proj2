@@ -104,7 +104,6 @@ print_board([H|T], Size, CurrentLine):-
     print_board(T, Size, C1).
 
 
-% USE THIS OUTSIDE THIS MODULE
 % print_game(+Board)
 print_game(Board):-
     nl,
@@ -116,6 +115,7 @@ print_game(Board):-
 
 % display_game(+GameState)
 % TODO (note: GameState is not only the Board)
+
 
 % initial_state(+Size, -GameState)
 % TODO (note: GameState is not only the Board)

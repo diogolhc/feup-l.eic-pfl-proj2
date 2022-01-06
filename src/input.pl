@@ -70,7 +70,6 @@ read_valid_column_index(Size, ColumnIndex):-
     read_valid_column_index(Size, ColumnIndex).
 
 
-% USE THIS OUTSIDE THIS MODULE
 % read_coords(+Size, -ColumnIndex, -RowIndex)
 read_coords(Size, ColumnIndex, RowIndex):-
     write('Col ? '),
