@@ -1,3 +1,5 @@
+:- consult('utils.pl').
+
 % read_number(-Number)
 read_number(Number):-
     read_number(Number, 0).
@@ -8,7 +10,7 @@ read_number(Number, Accum):-
     get_code(Code),
     char_code('0', ZeroAscii),
     Num is Code - ZeroAscii,
-    Num >= 0, Num =< 9, !,
+    number_between(Num, 0, 9), !,
     Next is Accum*10 + Num,
     read_number(Number, Next).
 read_number(Number, _):-
@@ -23,8 +25,8 @@ read_letter(LetterCode):-
     char_code('z', ZLowerAscii),
     char_code('A', AUpperAscii),
     char_code('Z', ZUpperAscii),(
-        (Code >= ALowerAscii, Code =< ZLowerAscii);
-        (Code >= AUpperAscii, Code =< ZUpperAscii)
+        number_between(Code, ALowerAscii, ZLowerAscii);
+        number_between(Code, AUpperAscii, ZUpperAscii)
     ), 
     peek_code(10), !, skip_line,
     LetterCode is Code.
@@ -37,12 +39,12 @@ read_letter(LetterCode):-
 letter_code_to_index(Code, Index):- % lower case
     char_code('a', ALowerAscii),
     char_code('z', ZLowerAscii),
-    Code >= ALowerAscii, Code =< ZLowerAscii,
+    number_between(Code, ALowerAscii, ZLowerAscii),
     Index is Code - ALowerAscii.
 letter_code_to_index(Code, Index):- % upper case
     char_code('A', AUpperAscii),
     char_code('Z', ZUpperAscii),
-    Code >= AUpperAscii, Code =< ZUpperAscii,
+    number_between(Code, AUpperAscii, ZUpperAscii),
     Index is Code - AUpperAscii.
 
 
@@ -50,7 +52,8 @@ letter_code_to_index(Code, Index):- % upper case
 read_valid_row_index(Size, RowIndex):-
     read_number(RowNumber),
     RowIndex is Size - RowNumber,
-    RowIndex >= 0, RowIndex < Size.
+    MaxIndex is Size-1,
+    number_between(RowIndex, 0, MaxIndex).
 read_valid_row_index(Size, RowIndex):-
     write('Row is out of bounds.\n'),
     read_valid_row_index(Size, RowIndex).
@@ -60,7 +63,8 @@ read_valid_row_index(Size, RowIndex):-
 read_valid_column_index(Size, ColumnIndex):-
     read_letter(LetterCode),
     letter_code_to_index(LetterCode, ColumnIndex),
-    ColumnIndex >= 0, ColumnIndex < Size.
+    MaxIndex is Size-1,
+    number_between(ColumnIndex, 0, MaxIndex).
 read_valid_column_index(Size, ColumnIndex):-
     write('Column is out of bounds.\n'),
     read_valid_column_index(Size, ColumnIndex).
