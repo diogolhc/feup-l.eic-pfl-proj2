@@ -100,9 +100,14 @@ print_board(Board):-
 
 
 % display_game(+GameState)
-% TODO (note: GameState is not only the Board)
+display_game([Turn|Board]):-
+    print_board(Board),
+    write('Current player: '),
+    write(Turn),
+    nl.
+
 
 % DEBUG ONLY
 test(Size):-
-    get_initial_board(Size, Board),
-    print_board(Board).
+    initial_state(Size, GameState),
+    display_game(GameState).

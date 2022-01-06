@@ -68,4 +68,5 @@ initial_state(Size, GameState):-
     number_between(Size, 6, 26),
     even(Size),
     get_initial_board(Size, Board),
-    GameState is [bot, Board]. % bot plays first
+    append([bot], Board, GameState).    % bot plays goes first
+                                        % TODO who should go first?
