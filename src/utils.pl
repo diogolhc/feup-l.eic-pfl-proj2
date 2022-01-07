@@ -39,3 +39,18 @@ list_multiply_scalar(_, [], []):-
 list_multiply_scalar(Scalar, [H1|T1], [H2|T2]):-
     H2 is Scalar * H1,
     list_multiply_scalar(Scalar, T1, T2).
+
+% sum_list(+List, -Sum)
+sum_list([], 0).
+sum_list([H|T], Sum) :-
+   sum_list(T, Rest),
+   Sum is H + Rest.
+
+% filter_negatives(+ListIn, -ListOut) 
+% TODO check sizes
+filter_negatives([], []).
+filter_negatives([H | T1], [0 | T2]) :- 
+    H < 0,
+    filter_negatives(T1, T2).
+filter_negatives([H | T1], [H | T2]) :-
+    filter_negatives(T1, T2).
