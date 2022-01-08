@@ -39,11 +39,13 @@ read_letter(LetterCode):-
 letter_code_to_index(Code, Index):- % lower case
     char_code('a', ALowerAscii),
     char_code('z', ZLowerAscii),
+    !,
     number_between(Code, ALowerAscii, ZLowerAscii),
     Index is Code - ALowerAscii.
 letter_code_to_index(Code, Index):- % upper case
     char_code('A', AUpperAscii),
     char_code('Z', ZUpperAscii),
+    !,
     number_between(Code, AUpperAscii, ZUpperAscii),
     Index is Code - AUpperAscii.
 
@@ -53,7 +55,8 @@ read_valid_row_index(Size, RowIndex):-
     read_number(RowNumber),
     RowIndex is Size - RowNumber,
     MaxIndex is Size-1,
-    number_between(RowIndex, 0, MaxIndex).
+    number_between(RowIndex, 0, MaxIndex),
+    !.
 read_valid_row_index(Size, RowIndex):-
     write('Row is out of bounds.\n'),
     read_valid_row_index(Size, RowIndex).
@@ -64,7 +67,8 @@ read_valid_column_index(Size, ColumnIndex):-
     read_letter(LetterCode),
     letter_code_to_index(LetterCode, ColumnIndex),
     MaxIndex is Size-1,
-    number_between(ColumnIndex, 0, MaxIndex).
+    number_between(ColumnIndex, 0, MaxIndex),
+    !.
 read_valid_column_index(Size, ColumnIndex):-
     write('Column is out of bounds.\n'),
     read_valid_column_index(Size, ColumnIndex).
@@ -76,6 +80,15 @@ read_coords(Size, ColumnIndex, RowIndex):-
     read_valid_column_index(Size, ColumnIndex),
     write('Row ? '),
     read_valid_row_index(Size, RowIndex).
+
+
+% read_move(+Size, -Move):-
+read_move(Size, [[C1,L1], [C2,L2]]):-
+    write('Insert source:\n'),
+    read_coords(Size, C1, L1),
+    write('Insert dest:\n'),
+    read_coords(Size, C2, L2),
+    !.
 
 /*
 % TODO remove once done
