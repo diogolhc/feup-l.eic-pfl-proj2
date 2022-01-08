@@ -84,7 +84,16 @@ move([Turn|Board], Move, [NewTurn|NewBoard]):-
 
 
 % game_over(+GameState, -Winner)
-% TODO (note: GameState is not only the Board)
+game_over([_|Board], bot):-
+    nth0(0, Board, TopRow),
+    max_member(Max, TopRow),
+    Max > 0.
+game_over([_|Board], top):-
+    length(Board, Height),
+    H1 is Height-1,
+    nth0(H1, Board, BotRow),
+    min_member(Min, BotRow),
+    Min < 0.
 
 
 % valid_moves(+GameState, -ListOfMoves)
@@ -102,7 +111,7 @@ get_initial_board([
   [  0,  0,  0,  0,  0,  0,  0,  0],
   [  0,  0,  0,  0,  0,  0,  0,  0],
   [  0, -1,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  1,  0,  0,  0,  0,  0],
+  [  0, -1,  1,  0,  0,  0,  0,  0],
   [  0,  0,  0,  2,  0,  0,  0,  0]
 ]).
 
@@ -131,5 +140,7 @@ test_l:-
     display_game(GameState),
     !,
     move(GameState, [[1,5],[2,6]], NewGameState),
-    display_game(NewGameState).
-    
+    display_game(NewGameState),
+    !,
+    game_over(NewGameState, Winner),
+    write(Winner).
