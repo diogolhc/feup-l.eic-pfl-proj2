@@ -57,11 +57,6 @@ get_initial_board(Size, Board):-
     append(Temp, MatrixBot, Board).
 
 
-% tank_type(+Number, -Type)
-tank_type(Number, Type):-
-    Type is abs(Number).
-
-
 % minimim Size = 6 and must be even
 % initial_state(+Size, -GameState)
 initial_state(Size, GameState):-

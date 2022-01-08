@@ -77,12 +77,13 @@ read_coords(Size, ColumnIndex, RowIndex):-
     write('Row ? '),
     read_valid_row_index(Size, RowIndex).
 
-
+/*
 % TODO remove once done
-test:-
+test_i:-
     write('Insert source coordinates:\n'),
     read_coords(8, C, R),
     nl,
     write(C),
     nl,
     write(R).
+*/
