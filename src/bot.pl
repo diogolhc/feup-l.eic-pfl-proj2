@@ -63,8 +63,25 @@ value(GameState, bot, Value) :-
     value(GameState, top, Inverted),
     Value is -1*Inverted.
 
+% best_move(+Move1, +Value1, +Move2, +Value2, -BestMove, -BestValue)
+best_move(Move1, Value1, _Move2, Value2, Move1, Value1) :- Value1 > Value2.
+best_move(_Move1, _Value1, Move2, Value2, Move2, Value2).
+
+
+% highest_value_move(+GameState, +MoveList, -BestValue, -BestMove)
+% TODO show error somehow?
+highest_value_move(_, [], -1, 0). 
+highest_value_move([Turn | Board], [CurrentMove | RestMoves], BestValue, BestMove) :-
+    do_valid_move(Board, CurrentMove, ResultBoard),
+    value([Turn | ResultBoard], Turn, CurrentValue),
+    highest_value_move([Turn | Board], RestMoves, NextValue, NextMove),
+    best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue).
+
 % choose_move(+GameState, +Level, -Move)
 % TODO (note: GameState is not only the Board)
+choose_move(GameState, 2, Move) :- 
+    valid_moves(GameState, ValidMoves),
+    highest_value_move(GameState, ValidMoves, _, Move).
 
 custom_gamestate(GameState) :-
     GameState = [   top,
@@ -73,5 +90,5 @@ custom_gamestate(GameState) :-
                     [   0,  0,  0,  0,  0,  0],
                     [   0,  0,  0,  0,  0,  0],
                     [   0,  0,  0,  0,  0,  0],
-                    [   0,  0,  0,  0,  0, -1]
+                    [   0,  0,  0,  0,  0,  0]
                 ].
