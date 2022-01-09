@@ -1,3 +1,5 @@
+:- use_module(library(random)). % TODO can we use this?
+
 % tank_value_map(+Tank, -Value)
 
 tank_value_map(0, 0).
@@ -90,6 +92,12 @@ highest_value_move([Turn | Board], [CurrentMove | RestMoves], BestValue, BestMov
 choose_move(GameState, 2, Move) :- 
     valid_moves(GameState, ValidMoves),
     highest_value_move(GameState, ValidMoves, _, Move).
+choose_move(GameState, 1, Move) :- 
+    use_module(library(random)),
+    valid_moves(GameState, ValidMoves),
+    length(ValidMoves, Size),
+    random(0, Size, RandomIndex),
+    nth0(RandomIndex, ValidMoves, Move).
 
 custom_gamestate(GameState) :-
     GameState = [   top,
