@@ -106,8 +106,9 @@ display_game([Turn|Board]):-
     write(Turn),
     nl.
 
-
+/*
 % DEBUG ONLY
-test(Size):-
+test_d(Size):-
     initial_state(Size, GameState),
     display_game(GameState).
+*/

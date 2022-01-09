@@ -85,3 +85,4 @@ matrix_put_at([Head|Tail1], [C, L], Elem, [Head|Tail2]):-
     L > 0,
     L1 is L-1,
     matrix_put_at(Tail1, [C, L1], Elem, Tail2).
+
