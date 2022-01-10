@@ -75,17 +75,12 @@ best_move(_Move1, _Value1, Move2, Value2, Move2, Value2).
 % TODO show error somehow?
 highest_value_move([Turn | Board], [LastMove], LastMoveValue, LastMove) :- 
     do_valid_move(Board, LastMove, ResultBoard),
-    value([Turn | ResultBoard], Turn, LastMoveValue),
-    write('\t'), write(LastMove), write(LastMoveValue), write('\n'). 
+    value([Turn | ResultBoard], Turn, LastMoveValue).
 highest_value_move([Turn | Board], [CurrentMove | RestMoves], BestValue, BestMove) :-
     do_valid_move(Board, CurrentMove, ResultBoard),
     value([Turn | ResultBoard], Turn, CurrentValue),
     highest_value_move([Turn | Board], RestMoves, NextValue, NextMove),
-    best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue),
-    write(CurrentMove), write(CurrentValue), 
-    write(NextMove), write(NextValue), 
-    write(BestMove), write(BestValue),
-    write('\n').
+    best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue).
 
 % choose_move(+GameState, +Level, -Move)
 % TODO (note: GameState is not only the Board)
