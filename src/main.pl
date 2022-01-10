@@ -39,4 +39,4 @@ play:-
     initial_state(8, GameState),
     display_game(GameState),
     !,
-    loop(GameState, [0, 2]).
+    loop(GameState, [1, 1]).
