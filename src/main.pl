@@ -38,5 +38,6 @@ play:-
     % NOTE: preliminary version
     initial_state(8, GameState),
     display_game(GameState),
+    read_player_types(Players),
     !,
-    loop(GameState, [1, 1]).
+    loop(GameState, Players).

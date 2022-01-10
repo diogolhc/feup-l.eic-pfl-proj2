@@ -90,6 +90,34 @@ read_move(Size, [[C1,L1], [C2,L2]]):-
     read_coords(Size, C2, L2),
     !.
 
+valid_player(0).
+valid_player(1).
+valid_player(2).
+
+% read_player_types(-Players)
+read_player_types(Players) :-
+    write('Choose the type of each player:\n'),
+    write('\t0 - human\n'),
+    write('\t1 - bot level 1\n'),
+    write('\t2 - bot level 2\n'),
+    char_code('0', ZeroAscii),
+    !,
+
+    write('Player 1:\n'),
+    get_code(Code1),
+    peek_code(10), !, skip_line,
+    Player1 is Code1 - ZeroAscii,
+    valid_player(Player1),
+
+    write('Player 2:\n'),
+    get_code(Code2),
+    peek_code(10), !, skip_line,
+    Player2 is Code2 - ZeroAscii,
+    valid_player(Player2),
+    
+    write('Players configurated!\n'),
+    Players = [Player1, Player2].
+
 /*
 % TODO remove once done
 test_i:-
