@@ -94,6 +94,14 @@ valid_player(0).
 valid_player(1).
 valid_player(2).
 
+ask_for_player(Player) :-
+    write('Choose player type\n'),
+    read_number(Player),
+    valid_player(Player).
+ask_for_player(Player) :-
+    write('Bad input, try again 2.0\n'),
+    ask_for_player(Player).
+
 % read_player_types(-Players)
 % TODO doesnt handle bad inputs
 read_player_types(Players) :-
@@ -101,16 +109,10 @@ read_player_types(Players) :-
     write('\t0 - human\n'),
     write('\t1 - bot level 1\n'),
     write('\t2 - bot level 2\n'),
-    !,
-
     write('Player top:\n'),
-    read_number(Player1),
-    valid_player(Player1),
-
+    ask_for_player(Player1),
     write('Player bot:\n'),
-    read_number(Player2),
-    valid_player(Player2),
-
+    ask_for_player(Player2),
     write('Players configurated!\n'),
     Players = [Player1, Player2].
 
