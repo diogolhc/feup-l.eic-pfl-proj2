@@ -6,19 +6,6 @@
 % 2: Heavy Tank
 % 3: Tank destroyer
 
-/*
-% TODO remove once done
-get_initial_board([
-  [ -1, -3, -3, -2, -2, -3, -3, -1],
-  [ -1, -1, -1, -1, -1, -1, -1, -1],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  1,  1,  1,  1,  1,  1,  1,  1],
-  [  1,  3,  3,  2,  2,  3,  3,  1]
-]).
-*/
 
 % back_line(+Size, -BackLine)
 back_line(Size, BackLine):-

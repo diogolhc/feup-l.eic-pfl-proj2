@@ -1,6 +1,5 @@
 :- use_module(library(lists)).
 :- consult('utils.pl').
-:- consult('display.pl'). % TODO remove after debug
 
 
 %% TANK BOT is the standard TANK TYPE representation 
@@ -99,48 +98,3 @@ game_over([_|Board], top):-
 % valid_moves(+GameState, -ListOfMoves)
 valid_moves(GameState, ListOfMoves):-
     findall(Move, valid_move(GameState, Move), ListOfMoves).
-
-
-
-% DEBUG ONLY:
-
-get_initial_board([
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  0,  0,  0,  0,  0],
-  [  0, -1,  0,  0,  0,  0,  0,  0],
-  [  0, -1,  1,  0,  0,  0,  0,  0],
-  [  0,  0,  0,  2,  0,  0,  0,  0]
-]).
-
-test_l:-
-    get_initial_board(Board),
-    append([top], Board, GameState),
-
-    /*
-    %trace,
-    !,
-    repeat,
-    valid_move(GameState, [ [3,6], Dest]),
-    write(Dest),
-    fail.
-    */
-
-    /*
-    valid_moves(GameState, ListOfMoves),
-    write(ListOfMoves),
-    length(ListOfMoves, S),
-    nl,
-    write(S).
-    */
-
-     
-    display_game(GameState),
-    !,
-    move(GameState, [[1,5],[2,6]], NewGameState),
-    display_game(NewGameState),
-    !,
-    game_over(NewGameState, Winner),
-    write(Winner).
