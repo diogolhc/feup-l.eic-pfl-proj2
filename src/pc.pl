@@ -85,13 +85,13 @@ highest_value_move([Turn | Board], [CurrentMove | RestMoves], BestValue, BestMov
     highest_value_move([Turn | Board], RestMoves, NextValue, NextMove),
     best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue).
 
-
+% TODO make more similar with example from theoretical class
 % choose_move(+GameState, +Level, -Move)
 choose_move(GameState, 2, Move):- 
     valid_moves(GameState, ValidMoves),
     highest_value_move(GameState, ValidMoves, _, Move).
 choose_move(GameState, 1, Move):- 
-    use_module(library(random)),
+    use_module(library(random)), % TODO remove ?
     valid_moves(GameState, ValidMoves),
     length(ValidMoves, Size),
     random(0, Size, RandomIndex),

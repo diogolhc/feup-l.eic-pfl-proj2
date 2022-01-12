@@ -95,3 +95,12 @@ sum_list([], 0).
 sum_list([H|T], Sum):-
    sum_list(T, Rest),
    Sum is H + Rest.
+
+
+% matrix_has_range(+Matrix, +Range)
+matrix_has_range(Matrix, positive):-
+    matrix_at(Matrix, _, Elem),
+    Elem > 0.
+matrix_has_range(Matrix, negative):-
+    matrix_at(Matrix, _, Elem),
+    Elem < 0.

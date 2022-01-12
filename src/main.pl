@@ -20,7 +20,7 @@ make_move([Turn|Board], 0, NewGameState):-
     move([Turn|Board], Move, NewGameState).
 make_move([Turn|Board], PlayerType, NewGameState):-
     choose_move([Turn|Board], PlayerType, Move),
-    move([Turn|Board], Move, NewGameState).
+    move([Turn|Board], Move, NewGameState). % TODO move checks if valid, but choose_move chooses one validated already, use predicate that doesn't check again
 
 
 % get_player(+Turn, +Players, -PlayerType)

@@ -87,12 +87,16 @@ game_over([_|Board], bot):-
     nth0(0, Board, TopRow),
     max_member(Max, TopRow),
     Max > 0.
+game_over([_|Board], bot):-
+    not(matrix_has_range(Board, negative)).
 game_over([_|Board], top):-
     length(Board, Height),
     H1 is Height-1,
     nth0(H1, Board, BotRow),
     min_member(Min, BotRow),
     Min < 0.
+game_over([_|Board], top):-
+    not(matrix_has_range(Board, positive)).
 
 
 % valid_moves(+GameState, -ListOfMoves)
