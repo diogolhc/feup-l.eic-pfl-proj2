@@ -1,4 +1,4 @@
-:- use_module(library(lists)). % TODO can we use this?
+:- use_module(library(lists)).
 :- consult('utils.pl').
 :- consult('display.pl'). % TODO remove after debug
 

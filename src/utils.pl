@@ -1,4 +1,4 @@
-:- use_module(library(between)). % TODO can we use this?
+:- use_module(library(between)).
 
 % TODO use between if we can use it ^^ is more versatile
 % number_between(+Num, +Min, +Max)
@@ -54,8 +54,7 @@ sub_coordinates([C1,L1], [C2,L2], [C3,L3]):-
     L3 is L1-L2.
 
 
-% TODO this is more like: matrix_at(+Matrix, ?[C,L], -Elem)
-% matrix_at(+Matrix, +[C,L], -Elem)
+% matrix_at(+Matrix, ?[C,L], -Elem)
 matrix_at(Matrix, [C, L], Elem):-
     length(Matrix, Height),
     H1 is Height-1,
