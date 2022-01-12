@@ -109,8 +109,8 @@ ask_for_player(Player):-
 read_player_types([Player1, Player2]):-
     write('Choose the type of each player:\n'),
     write('\t0 - human\n'),
-    write('\t1 - bot level 1\n'),
-    write('\t2 - bot level 2\n'),
+    write('\t1 - PC level 1\n'),
+    write('\t2 - PC level 2\n'),
     write('Player top:\n'),
     ask_for_player(Player1),
     write('Player bot:\n'),

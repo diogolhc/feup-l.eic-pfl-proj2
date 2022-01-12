@@ -50,7 +50,7 @@ evaluate_lines(Board, Size, Player, Value):-
     Value is ValueAcc+CurrLineValue.
 
 
-% param +Player is either top or bot (bottom not ai)
+% param +Player is either top or bot (bot = bottom, not PC)
 % value(+GameState, +Player, -Value)
 value([_|Board], top, Value):-
     length(Board, BoardSize),

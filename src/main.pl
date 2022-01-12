@@ -2,15 +2,15 @@
 :- consult('display.pl').
 :- consult('input.pl').
 :- consult('logic.pl').
-:- consult('bot.pl').
+:- consult('pc.pl').
 :- consult('utils.pl').
 :- consult('textbeauty.pl').
 
 
 % Players is [top, bot]
 % PlayerType can be :   0 - human
-%                       1 - ai difficulty level 1
-%                       2 - ai difficulty level 2
+%                       1 - PC difficulty level 1
+%                       2 - PC difficulty level 2
 
 
 % make_move(+GameState, +PlayerType, -NewGameState)
