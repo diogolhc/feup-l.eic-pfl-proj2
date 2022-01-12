@@ -36,8 +36,8 @@
 
 \href{https://boardgamegeek.com/boardgame/321224/breakthrough-tanks}{BreakthroughTanks}
 é um jogo de tabuleiro de estratégia por turnos. É jogado por 2 jogadores oponentes, cada 
-um controlando um conjunto de peças sobre um tabuleiro 8x8. O objetivo do jogo é ser o primeiro
-a ter uma peça na linha mais distante, ou seja, a casa do oponente. 
+um controlando um conjunto de peças sobre um tabuleiro quadrangular, de dimensões pares, que podem variar
+de 6x6 até 26x26. O objetivo do jogo é ser o primeiro a ter uma peça na linha mais distante, ou seja, a casa do oponente. 
 
 \subsection{Peças}
 
@@ -56,7 +56,7 @@ a ter uma peça na linha mais distante, ou seja, a casa do oponente.
     \label{fig:pecas}
 \end{figure}
 
-\noindent Cada jogador começa com 2 \textit{heavy tanks}, 4 \textit{tank destroyers}
+\noindent Num tabuleiro 8x8, cada jogador começa com 2 \textit{heavy tanks}, 4 \textit{tank destroyers}
 e 10 \textit{medium tanks}. A sua disposição inicial no tabuleiro é a seguinte:
 
 \begin{figure}[H]
@@ -65,6 +65,11 @@ e 10 \textit{medium tanks}. A sua disposição inicial no tabuleiro é a seguint
     \caption{Disposição inicial do tabuleiro.}
     \label{fig:board}
 \end{figure}
+
+\noindent Em todas as dimensões de tabuleiro, cada jogador fica com as linhas mais próximas de si completas com \textit{tanks}.
+A 2ª linha mais próxima fica completa com \textit{medium tanks} e a linha mais próxima varia no número
+de \textit{tank destroyers}, sendo que eles se posicionam em ambos os lados dos \textit{heavy tanks}.
+Em todas as dimensões o posicionamento e quantidade (2) de \textit{heavy tanks} mantém-se.
 
 \subsection{Movimentação simples}
 Em cada turno uma peça faz uma movimentação simples ou executa uma captura. No caso 
@@ -104,6 +109,7 @@ mesmo mover outra peça.
 
 O jogo acaba quando um jogador consegue chegar com uma peça sua à linha mais
 afastada, ou seja, à linha mais próxima do oponente.
+De notar que, caso um jogador fique sem peças, o seu adversário vence também o jogo.
 
 
 %%% Lógica do jogo %%%
