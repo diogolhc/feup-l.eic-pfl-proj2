@@ -39,13 +39,11 @@ read_letter(LetterCode):-
 letter_code_to_index(Code, Index):- % lower case
     char_code('a', ALowerAscii),
     char_code('z', ZLowerAscii),
-    !,
     between(ALowerAscii, ZLowerAscii, Code),
     Index is Code - ALowerAscii.
 letter_code_to_index(Code, Index):- % upper case
     char_code('A', AUpperAscii),
     char_code('Z', ZUpperAscii),
-    !,
     between(AUpperAscii, ZUpperAscii, Code),
     Index is Code - AUpperAscii.
 
@@ -103,7 +101,7 @@ ask_for_player(Player):-
     read_number(Player),
     valid_player(Player).
 ask_for_player(Player):-
-    write('Bad input, try again 2.0\n'),
+    write('Bad input, try again 2.0\n'), % TODO remove 2.0 (?)
     ask_for_player(Player).
 
 

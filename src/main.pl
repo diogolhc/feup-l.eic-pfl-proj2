@@ -43,7 +43,7 @@ loop([Turn|Board], Players):-
 
 
 
-/* MENU STUFF */
+/* MENU */
 
 play_game:-
     read_player_types(Players),
