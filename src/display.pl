@@ -92,7 +92,7 @@ print_board([H|T], Size, CurrentLine):-
 
 % print_board(+Board)
 print_board(Board):-
-    nl,
+    nl, nl,
     length(Board, Size),
     print_nav_horizontal(Size),
     print_board(Board, Size, Size),
@@ -107,7 +107,7 @@ display_game([Turn|Board]):-
     nl.
 
 
-display_logo :-
+display_logo:-
     write('  ____  _____  ______          _  _________ _    _ _____   ____  _    _  _____ _    _\n'),
     write(' |  _ \\|  __ \\|  ____|   /\\   | |/ /__   __| |  | |  __ \\ / __ \\| |  | |/ ____| |  | |\n'),
     write(' | |_) | |__) | |__     /  \\  | \' /   | |  | |__| | |__) | |  | | |  | | |  __| |__| |\n'),
@@ -115,7 +115,8 @@ display_logo :-
     write(' | |_) | | \\ \\| |____ / ____ \\| . \\   | |  | |  | | | \\ \\| |__| | |__| | |__| | |  | |\n'),
     write(' |____/|_|  \\_\\______/_/    \\_\\_|\\_\\  |_|  |_|  |_|_|   \\_\\____/ \\____/ \\_____|_|  |_|\n').
 
-display_menu :-
+
+display_menu:-
     write('\n\n'),
     print_game_banner('MAIN MENU'),
     write('\n\n'),
@@ -123,3 +124,10 @@ display_menu :-
     write('2 - rules\n'),
     write('3 - quit game\n'),
     write('\n').
+
+
+% congratulate(+Winner)
+congratulate(Winner):-
+    write('Congratulations, '),
+    write(Winner),
+    write(', you have WON!\n').

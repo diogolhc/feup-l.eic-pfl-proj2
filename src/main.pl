@@ -30,16 +30,15 @@ get_player(bot, Players, PlayerType):-
     nth0(1, Players, PlayerType).
 
 
-% loop(+GameState, +Players)
-loop([Turn|Board], Players):-
-    repeat,
+% game_loop(+GameState, +Players)
+game_loop(GameState, _Players):-
+    game_over(GameState, Winner), !,
+    congratulate(Winner).
+game_loop([Turn|Board], Players):-
     get_player(Turn, Players, TurnPlayer),
     make_move([Turn|Board], TurnPlayer, NewGameState),
-    display_game(NewGameState), 
-    !, (
-        (game_over(NewGameState, Winner), write(Winner), write(' WON!\n'));
-        loop(NewGameState, Players)
-    ).
+    display_game(NewGameState), !,
+    game_loop(NewGameState, Players).
 
 
 
@@ -51,7 +50,7 @@ play_game:-
     initial_state(BoardSize, GameState),
     display_game(GameState),
     !,
-    loop(GameState, Players).
+    game_loop(GameState, Players).
 
 
 view_rules:-
@@ -80,14 +79,16 @@ menu_option(_):-
     error_handler.
 
 
+check_exit(3).
+check_exit(_):-
+    menu_loop.
+
+
 menu_loop:-
     display_menu,
     read_number(Command),
     menu_option(Command),
-    (
-        Command == 3 ;
-        menu_loop
-    ).
+    check_exit(Command).
 
 
 % play

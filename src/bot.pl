@@ -66,7 +66,7 @@ value(GameState, bot, Value):-
 best_move(Move1, Value1, _Move2, Value2, Move1, Value1):-
     Value1 > Value2.
 best_move(Move1, Value1, Move2, Value2, Move3, Value3):-
-    Value1 == Value2,
+    Value1 == Value2, % TODO shouldn't this go to the prototype with same terms? eg.  best_move(Move1, Value12, Move2, Value12, Move3, Value3)
     random(0, 2, Res),
     MoveValueList = [[Move1, Value1], [Move2, Value2]],
     matrix_at(MoveValueList, [0, Res], Move3),
