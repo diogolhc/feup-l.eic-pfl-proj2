@@ -100,7 +100,7 @@ print_board(Board):-
 
 
 % display_game(+GameState)
-display_game([Turn|Board]):-
+display_game(Turn-Board):-
     print_board(Board),
     write('Current player: '),
     write(Turn),

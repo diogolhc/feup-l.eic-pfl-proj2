@@ -14,13 +14,13 @@
 
 
 % make_move(+GameState, +PlayerType, -NewGameState)
-make_move([Turn|Board], 0, NewGameState):-
+make_move(Turn-Board, 0, NewGameState):-
     length(Board, Size),
     read_move(Size, Move),
-    move([Turn|Board], Move, NewGameState).
-make_move([Turn|Board], PlayerType, NewGameState):-
-    choose_move([Turn|Board], PlayerType, Move),
-    move([Turn|Board], Move, NewGameState). % TODO move checks if valid, but choose_move chooses one validated already, use predicate that doesn't check again
+    move(Turn-Board, Move, NewGameState).
+make_move(Turn-Board, PlayerType, NewGameState):-
+    choose_move(Turn-Board, PlayerType, Move),
+    move(Turn-Board, Move, NewGameState). % TODO move checks if valid, but choose_move chooses one validated already, use predicate that doesn't check again
 
 
 % get_player(+Turn, +Players, -PlayerType)
@@ -34,9 +34,9 @@ get_player(bot, Players, PlayerType):-
 game_loop(GameState, _Players):-
     game_over(GameState, Winner), !,
     congratulate(Winner).
-game_loop([Turn|Board], Players):-
+game_loop(Turn-Board, Players):-
     get_player(Turn, Players, TurnPlayer),
-    make_move([Turn|Board], TurnPlayer, NewGameState),
+    make_move(Turn-Board, TurnPlayer, NewGameState),
     display_game(NewGameState), !,
     game_loop(NewGameState, Players).
 

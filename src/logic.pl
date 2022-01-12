@@ -59,7 +59,7 @@ uniform_move(top, L1, L2):-
 
 
 % valid_move(+GameState, ?Move)
-valid_move([Turn|Board], [[C1,L1], [C2,L2]]):-
+valid_move(Turn-Board, [[C1,L1], [C2,L2]]):-
     matrix_at(Board, [C1,L1], Tank),
     is_player_tank(Turn, Tank),
     matrix_at(Board, [C2,L2], Destination),
@@ -76,26 +76,26 @@ switch_turn(bot, top).
 
 
 % move(+GameState, +Move, -NewGameState)
-move([Turn|Board], Move, [NewTurn|NewBoard]):-
-    valid_move([Turn|Board], Move),
+move(Turn-Board, Move, NewTurn-NewBoard):-
+    valid_move(Turn-Board, Move),
     do_valid_move(Board, Move, NewBoard),
     switch_turn(Turn, NewTurn).
 
 
 % game_over(+GameState, -Winner)
-game_over([_|Board], bot):-
+game_over(_-Board, bot):-
     nth0(0, Board, TopRow),
     max_member(Max, TopRow),
     Max > 0.
-game_over([_|Board], bot):-
+game_over(_-Board, bot):-
     not(matrix_has_range(Board, negative)).
-game_over([_|Board], top):-
+game_over(_-Board, top):-
     length(Board, Height),
     H1 is Height-1,
     nth0(H1, Board, BotRow),
     min_member(Min, BotRow),
     Min < 0.
-game_over([_|Board], top):-
+game_over(_-Board, top):-
     not(matrix_has_range(Board, positive)).
 
 

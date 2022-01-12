@@ -46,9 +46,7 @@ get_initial_board(Size, Board):-
 
 % minimim Size = 6 and must be even
 % initial_state(+Size, -GameState)
-initial_state(Size, GameState):-
-    between(6, 26, Size),
+initial_state(Size, bot-Board):- % bot plays goes first                                     
+    between(6, 26, Size),        % TODO who should go first?
     even(Size),
-    get_initial_board(Size, Board),
-    append([bot], Board, GameState).    % bot plays goes first
-                                        % TODO who should go first?
+    get_initial_board(Size, Board).    

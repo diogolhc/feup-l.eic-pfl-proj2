@@ -52,7 +52,7 @@ evaluate_lines(Board, Size, Player, Value):-
 
 % param +Player is either top or bot (bot = bottom, not PC)
 % value(+GameState, +Player, -Value)
-value([_|Board], top, Value):-
+value(_-Board, top, Value):-
     length(Board, BoardSize),
     evaluate_lines(Board, BoardSize, top, TopValue),
     evaluate_lines(Board, BoardSize, bot, BotValue),
@@ -76,13 +76,13 @@ best_move(_Move1, _Value1, Move2, Value2, Move2, Value2).
 
 % highest_value_move(+GameState, +MoveList, -BestValue, -BestMove)
 % TODO show error somehow?
-highest_value_move([Turn | Board], [LastMove], LastMoveValue, LastMove):- 
+highest_value_move(Turn-Board, [LastMove], LastMoveValue, LastMove):- 
     do_valid_move(Board, LastMove, ResultBoard),
-    value([Turn | ResultBoard], Turn, LastMoveValue).
-highest_value_move([Turn | Board], [CurrentMove | RestMoves], BestValue, BestMove):-
+    value(Turn-ResultBoard, Turn, LastMoveValue).
+highest_value_move(Turn-Board, [CurrentMove | RestMoves], BestValue, BestMove):-
     do_valid_move(Board, CurrentMove, ResultBoard),
-    value([Turn | ResultBoard], Turn, CurrentValue),
-    highest_value_move([Turn | Board], RestMoves, NextValue, NextMove),
+    value(Turn-ResultBoard, Turn, CurrentValue),
+    highest_value_move(Turn-Board, RestMoves, NextValue, NextMove),
     best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue).
 
 % TODO make more similar with example from theoretical class
