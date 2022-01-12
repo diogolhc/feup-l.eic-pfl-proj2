@@ -84,3 +84,16 @@ matrix_put_at([Head|Tail1], [C, L], Elem, [Head|Tail2]):-
     L > 0,
     L1 is L-1,
     matrix_put_at(Tail1, [C, L1], Elem, Tail2).
+
+filter_negatives([], []).
+filter_negatives([Elem | Rest], [0 | FilteredRest]) :- 
+    Elem < 0,
+    filter_negatives(Rest, FilteredRest).
+filter_negatives([Elem | Rest], [Elem | FilteredRest]) :- 
+    filter_negatives(Rest, FilteredRest).
+
+sum_list([], 0).
+sum_list([H|T], Sum) :-
+   sum_list(T, Rest),
+   Sum is H + Rest.
+

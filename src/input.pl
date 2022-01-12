@@ -90,6 +90,42 @@ read_move(Size, [[C1,L1], [C2,L2]]):-
     read_coords(Size, C2, L2),
     !.
 
+valid_player(0).
+valid_player(1).
+valid_player(2).
+
+ask_for_player(Player) :-
+    write('Choose player type\n'),
+    read_number(Player),
+    valid_player(Player).
+ask_for_player(Player) :-
+    write('Bad input, try again 2.0\n'),
+    ask_for_player(Player).
+
+% read_player_types(-Players)
+% TODO doesnt handle bad inputs
+read_player_types(Players) :-
+    write('Choose the type of each player:\n'),
+    write('\t0 - human\n'),
+    write('\t1 - bot level 1\n'),
+    write('\t2 - bot level 2\n'),
+    write('Player top:\n'),
+    ask_for_player(Player1),
+    write('Player bot:\n'),
+    ask_for_player(Player2),
+    write('Players configurated!\n'),
+    Players = [Player1, Player2].
+
+read_board_size(BoardSize) :-
+    write('Even integer in range 6-26\n'),
+    read_number(BoardSize),
+    even(BoardSize),
+    between(6, 26, BoardSize).
+read_board_size(BoardSize) :-
+    write('Bad input\n'),
+    read_board_size(BoardSize).
+
+
 /*
 % TODO remove once done
 test_i:-
