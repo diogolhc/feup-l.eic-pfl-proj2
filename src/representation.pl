@@ -9,7 +9,7 @@
 
 % back_line(+Size, -BackLine)
 back_line(Size, BackLine):-
-    number_between(Size, 6, 26),
+    between(6, 26, Size),
     HalfNumDestroyers is (Size-4) // 2,
     num_line(3, HalfNumDestroyers, HalfDestroyers),
     append([1], HalfDestroyers, Temp1),
@@ -20,7 +20,7 @@ back_line(Size, BackLine):-
 
 % bot_player_rep(+Size, -Matrix)
 bot_player_rep(Size, Matrix):-
-    number_between(Size, 6, 26),
+    between(6, 26, Size),
     num_line(1, Size, AllOne),
     back_line(Size, BackLine),
     append([AllOne], [BackLine], Matrix).
@@ -34,7 +34,7 @@ mirror_rep(Matrix, MirrorMatrix):-
 
 % get_initial_board(+Size, -Board)
 get_initial_board(Size, Board):-
-    number_between(Size, 6, 26),
+    between(6, 26, Size),
     even(Size),
     bot_player_rep(Size, MatrixBot),
     mirror_rep(MatrixBot, MatrixTop),
@@ -47,7 +47,7 @@ get_initial_board(Size, Board):-
 % minimim Size = 6 and must be even
 % initial_state(+Size, -GameState)
 initial_state(Size, GameState):-
-    number_between(Size, 6, 26),
+    between(6, 26, Size),
     even(Size),
     get_initial_board(Size, Board),
     append([bot], Board, GameState).    % bot plays goes first

@@ -1,10 +1,5 @@
 :- use_module(library(between)).
 
-% TODO use between if we can use it ^^ is more versatile
-% number_between(+Num, +Min, +Max)
-number_between(Num, Min, Max):-
-    Num >= Min, Num =< Max.
-
 
 % even(+Num)
 even(Num):-

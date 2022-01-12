@@ -10,7 +10,7 @@ read_number(Number, Accum):-
     get_code(Code),
     char_code('0', ZeroAscii),
     Num is Code - ZeroAscii,
-    number_between(Num, 0, 9), !,
+    between(0, 9, Num), !,
     Next is Accum*10 + Num,
     read_number(Number, Next).
 read_number(Number, _):-
@@ -24,9 +24,9 @@ read_letter(LetterCode):-
     char_code('a', ALowerAscii),
     char_code('z', ZLowerAscii),
     char_code('A', AUpperAscii),
-    char_code('Z', ZUpperAscii),(
-        number_between(Code, ALowerAscii, ZLowerAscii);
-        number_between(Code, AUpperAscii, ZUpperAscii)
+    char_code('Z', ZUpperAscii), (
+        between(ALowerAscii, ZLowerAscii, Code);
+        between(AUpperAscii, ZUpperAscii, Code)
     ), 
     peek_code(10), !, skip_line,
     LetterCode is Code.
@@ -40,13 +40,13 @@ letter_code_to_index(Code, Index):- % lower case
     char_code('a', ALowerAscii),
     char_code('z', ZLowerAscii),
     !,
-    number_between(Code, ALowerAscii, ZLowerAscii),
+    between(ALowerAscii, ZLowerAscii, Code),
     Index is Code - ALowerAscii.
 letter_code_to_index(Code, Index):- % upper case
     char_code('A', AUpperAscii),
     char_code('Z', ZUpperAscii),
     !,
-    number_between(Code, AUpperAscii, ZUpperAscii),
+    between(AUpperAscii, ZUpperAscii, Code),
     Index is Code - AUpperAscii.
 
 
@@ -55,7 +55,7 @@ read_valid_row_index(Size, RowIndex):-
     read_number(RowNumber),
     RowIndex is Size - RowNumber,
     MaxIndex is Size-1,
-    number_between(RowIndex, 0, MaxIndex),
+    between(0, MaxIndex, RowIndex),
     !.
 read_valid_row_index(Size, RowIndex):-
     write('Row is out of bounds.\n'),
@@ -67,7 +67,7 @@ read_valid_column_index(Size, ColumnIndex):-
     read_letter(LetterCode),
     letter_code_to_index(LetterCode, ColumnIndex),
     MaxIndex is Size-1,
-    number_between(ColumnIndex, 0, MaxIndex),
+    between(0, MaxIndex, ColumnIndex),
     !.
 read_valid_column_index(Size, ColumnIndex):-
     write('Column is out of bounds.\n'),
