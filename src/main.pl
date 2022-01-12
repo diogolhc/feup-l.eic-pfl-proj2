@@ -16,6 +16,7 @@
 % make_move(+GameState, +PlayerType, -NewGameState)
 make_move(Turn-Board, 0, NewGameState):-
     length(Board, Size),
+    repeat,
     read_move(Size, Move),
     move(Turn-Board, Move, NewGameState).
 make_move(Turn-Board, PlayerType, NewGameState):-
