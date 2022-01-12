@@ -95,28 +95,34 @@ valid_player(1).
 valid_player(2).
 
 % read_player_types(-Players)
+% TODO doesnt handle bad inputs
 read_player_types(Players) :-
     write('Choose the type of each player:\n'),
     write('\t0 - human\n'),
     write('\t1 - bot level 1\n'),
     write('\t2 - bot level 2\n'),
-    char_code('0', ZeroAscii),
     !,
 
-    write('Player 1:\n'),
-    get_code(Code1),
-    peek_code(10), !, skip_line,
-    Player1 is Code1 - ZeroAscii,
+    write('Player top:\n'),
+    read_number(Player1),
     valid_player(Player1),
 
-    write('Player 2:\n'),
-    get_code(Code2),
-    peek_code(10), !, skip_line,
-    Player2 is Code2 - ZeroAscii,
+    write('Player bot:\n'),
+    read_number(Player2),
     valid_player(Player2),
-    
+
     write('Players configurated!\n'),
     Players = [Player1, Player2].
+
+read_board_size(BoardSize) :-
+    write('Even integer in range 6-26\n'),
+    read_number(BoardSize),
+    even(BoardSize),
+    between(6, 26, BoardSize).
+read_board_size(BoardSize) :-
+    write('Bad input\n'),
+    read_board_size(BoardSize).
+
 
 /*
 % TODO remove once done

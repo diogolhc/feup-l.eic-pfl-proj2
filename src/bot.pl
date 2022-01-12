@@ -4,8 +4,8 @@
 
 tank_value_map(0, 0).
 tank_value_map(1, 100).
-tank_value_map(2, 125).
-tank_value_map(3, 150).
+tank_value_map(2, 150).
+tank_value_map(3, 125).
 tank_value_map(Negative, Val) :-
     Negative < 0,
     Positive is -1 * Negative,
@@ -67,7 +67,15 @@ value(GameState, bot, Value) :-
 
 % best_move(+Move1, +Value1, +Move2, +Value2, -BestMove, -BestValue)
 
+
+
 best_move(Move1, Value1, _Move2, Value2, Move1, Value1) :- Value1 > Value2.
+best_move(Move1, Value1, Move2, Value2, Move3, Value3) :-
+    Value1 == Value2,
+    random(0, 2, Res),
+    MoveValueList = [[Move1, Value1], [Move2, Value2]],
+    matrix_at(MoveValueList, [0, Res], Move3),
+    matrix_at(MoveValueList, [1, Res], Value3).
 best_move(_Move1, _Value1, Move2, Value2, Move2, Value2).
 
 

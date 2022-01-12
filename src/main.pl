@@ -4,6 +4,8 @@
 :- consult('logic.pl').
 :- consult('bot.pl').
 :- consult('utils.pl').
+:- consult('gamemenu.pl').
+:- consult('textbeauty.pl').
 
 % Players is [top, bot]
 % PlayerType can be :   0 - human
@@ -28,16 +30,57 @@ loop([Turn|Board], Players):-
     repeat,
     get_player(Turn, Players, TurnPlayer),
     make_move([Turn|Board], TurnPlayer, NewGameState),
-    display_game(NewGameState), !, (
+    display_game(NewGameState), 
+    !, 
+    (
         (game_over(NewGameState, Winner), write(Winner), write(' WON!\n'));
         loop(NewGameState, Players)
     ).
 
-% play
-play:-
-    % NOTE: preliminary version
-    initial_state(8, GameState),
-    display_game(GameState),
+/* MENU STUFF */
+
+play_game :-
     read_player_types(Players),
+    read_board_size(BoardSize),
+    initial_state(BoardSize, GameState),
+    display_game(GameState),
     !,
     loop(GameState, Players).
+
+view_rules :-
+    write('\n'),
+    print_game_banner('RULES'),
+    write('\n\nTODO put rules here\n'),
+    write('enter - back\n\n'),
+    skip_line.
+
+quit_game :-
+    write('Thanks for playing BREAKTHROUGH!\n').
+
+error_handler :-
+    write('Bad input, try again\n').
+
+menu_option(1) :-
+    play_game, !.
+menu_option(2) :-
+    view_rules, !.
+menu_option(3) :-
+    quit_game, !.
+menu_option(_) :-
+    error_handler.
+
+menu_loop :-
+    display_menu,
+    read_number(Command),
+    menu_option(Command),
+    (
+        Command == 3 ;
+        menu_loop
+    ).
+
+% play TODO add quit game
+play :-
+    display_logo,
+    menu_loop.
+    
+    
