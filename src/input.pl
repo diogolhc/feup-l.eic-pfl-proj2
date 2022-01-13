@@ -101,7 +101,7 @@ ask_for_player(Player):-
     read_number(Player),
     valid_player(Player).
 ask_for_player(Player):-
-    write('Bad input, try again 2.0\n'), % TODO remove 2.0 (?)
+    write('Bad input, try again\n'),
     ask_for_player(Player).
 
 
