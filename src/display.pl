@@ -1,4 +1,5 @@
 :- consult('textbeauty.pl').
+:- consult('representation.pl').
 
 
 % code(+Code, -BoardRepresentation)
@@ -131,3 +132,55 @@ congratulate(Winner):-
     write('Congratulations, '),
     write(Winner),
     write(', you have WON!\n').
+
+
+view_rules:-
+    nl,
+    print_game_banner('RULES'),
+
+    write('\n\nVictory condition:\n'),
+    write('- Be the first to reach the enemy\'s closest line to win!\n'),
+
+    write('\n\nInitial Game Board 8x8:\n'),
+    get_initial_board(8, Board),
+    print_board(Board),
+
+    write('\nTank types:\n'),
+    write('M -> Medium Tank\n'),
+    write('T -> Heavy Tank\n'),
+    write('D -> Tank Destroyer\n'),
+
+    write('\nTank\'s movement:\n'),
+    write('+---+---+---+\n'),
+    write('|   |   |   |\n'),
+    write('+---+---+---+\n'),
+    write('| X | X | X |\n'),
+    write('+---+---+---+\n'),
+    write('|   | M |   |\n'),
+    write('+---+---+---+\n'),
+
+    write('\nTank\'s attack range:\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+    write('|   |   |   |   |   |  |   |   |   |   |   |   |   |   |   |   |   |\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+    write('|   |   |   |   |   |  | X |   | X |   | X |   |   |   | X |   |   |\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+    write('|   | X | X | X |   |  |   | X | X | X |   |   |   |   | X |   |   |\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+    write('|   |   | M |   |   |  |   |   | T |   |   |   |   |   | D |   |   |\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+    write('|   |   |   |   |   |  |   |   |   |   |   |   |   |   |   |   |   |\n'),
+    write('+---+---+---+---+---+  +---+---+---+---+---+   +---+---+---+---+---+\n'),
+
+    write('\nAfter a tank \'A\' attacks a tank \'B\', \'B\' gets out of the board,\nand \'A\' moves to the place where \'B\' was.\n'),
+
+    write('\n\n<enter> - back\n\n'),
+    skip_line.
+
+
+quit_game:-
+    write('Thanks for playing BREAKTHROUGH!\n').
+
+
+error_handler:-
+    write('Bad input, try again\n').

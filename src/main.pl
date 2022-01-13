@@ -19,9 +19,10 @@ make_move(Turn-Board, 0, NewGameState):-
     repeat,
     read_move(Size, Move),
     move(Turn-Board, Move, NewGameState).
-make_move(Turn-Board, PlayerType, NewGameState):-
+make_move(Turn-Board, PlayerType, NewTurn-NewBoard):-
     choose_move(Turn-Board, PlayerType, Move),
-    move(Turn-Board, Move, NewGameState). % TODO move checks if valid, but choose_move chooses one validated already, use predicate that doesn't check again
+    do_valid_move(Board, Move, NewBoard),
+    switch_turn(Turn, NewTurn).
 
 
 % get_player(+Turn, +Players, -PlayerType)
@@ -52,22 +53,6 @@ play_game:-
     display_game(GameState),
     !,
     game_loop(GameState, Players).
-
-
-view_rules:-
-    write('\n'),
-    print_game_banner('RULES'),
-    write('\n\nTODO put rules here\n'),
-    write('enter - back\n\n'),
-    skip_line.
-
-
-quit_game:-
-    write('Thanks for playing BREAKTHROUGH!\n').
-
-
-error_handler:-
-    write('Bad input, try again\n').
 
 
 menu_option(1):-
