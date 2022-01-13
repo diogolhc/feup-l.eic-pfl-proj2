@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{enumitem}
+\usepackage{listings}
 \usepackage[portuguese]{babel}
 
 \geometry{margin=1in}
@@ -14,10 +15,10 @@
 %%% Identificação %%%
 
 \author{
-    Diogo Luís Henriques Costa\\
+    Diogo Luís Henriques Costa - 50\% \\
     up201906731
     \and
-    Francisco José Barbosa Marques Colino\\
+    Francisco José Barbosa Marques Colino - 50\% \\
     up201905405
 }
 \title{FEUP -- Programação Funcional e em Lógica \large 2021/2022 \\ \large TP2 -- BreakthroughTanks\_1}
@@ -29,6 +30,7 @@
 \section{Instalação e execução}
 
 % TODO
+% o que dar include no sicstus e "play."
 
 
 %%% Descrição do jogo %%%
@@ -118,8 +120,82 @@ De notar que, caso um jogador fique sem peças, o seu adversário vence também 
     %%% Representação interna do estado do jogo %%%
     \subsection{Representação interna do estado do jogo}
 
-    % TODO
+    O estado do jogo, \textit{GameState}, é representado por: Turn-Board. Por sua vez, Turn pode ser ``top" ou ``bot"
+    e Board é uma lista de listas de inteiros representando o tabuleiro.  
 
+    \noindent O board é preenchido da seguinte forma:
+    \begin{itemize}[topsep=4pt,itemsep=2pt]
+        \item  0 -- Espaço vazio
+        \item  1 -- \textit{Medium Tank} do \textit{bot player}
+        \item  2 -- \textit{Heavy Tank} do \textit{bot player}
+        \item  3 -- \textit{Tank destroyer} do \textit{bot player}
+        \item -1 -- \textit{Medium Tank} do \textit{top player}
+        \item -2 -- \textit{Heavy Tank} do \textit{top player}
+        \item -3 -- \textit{Tank destroyer} do \textit{top player}
+    \end{itemize}  
+
+    \vspace{1em}
+    Desta forma, cada tipo de \textit{tank}: \textit{medium tank, heavy tank, tank destroyer}, pode ser obtido
+    recorrendo ao valor absoluto. Por outro lado, as peças de cada jogador distinguem-se pelo sinal: as peças do \textit{top player}
+    têm representação interna negativa enquanto que as peças do \textit{bot player} têm representação positiva.
+
+    \vspace{2em}
+    \noindent Exemplos de estados de jogo:
+    
+    \subsubsection{Estado de jogo inicial, 8x8}
+\begin{lstlisting}[language=prolog]
+bot-[
+        [ -1, -3, -3, -2, -2, -3, -3, -1],
+        [ -1, -1, -1, -1, -1, -1, -1, -1],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  1,  1,  1,  1,  1,  1,  1,  1],
+        [  1,  3,  3,  2,  2,  3,  3,  1]
+    ]
+\end{lstlisting}
+
+    \noindent De modo a obter este estado, recore-se ao predicado
+    $ initial\_state(+Size, -GameState) $ definido no ficheiro \textit{representation.pl}:
+\begin{lstlisting}[language=prolog]
+initial_state(Size, bot-Board):-
+    between(6, 26, Size),
+    even(Size),
+    get_initial_board(Size, Board).
+\end{lstlisting}
+
+
+    \subsubsection{Estado de jogo intermédio, 8x8}
+\begin{lstlisting}[language=prolog]
+top-[
+        [  0,  0,  0,  0,  0, -3, -3, -1],
+        [  0,  0,  0,  0, -1, -1, -1, -1],
+        [ -1,  2,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  0, -2,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  1,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  1,  1,  1,  1],
+        [  1,  0,  0,  0,  0,  3,  3,  1]
+]
+\end{lstlisting}
+
+    \subsubsection{Estado de jogo final, 8x8}
+\begin{lstlisting}[language=prolog]
+top-[
+        [  2,  0,  0,  0,  0, -3, -3, -1],
+        [  0,  0,  0,  0,  0, -1, -1, -1],
+        [ -1,  0,  0, -1,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  1,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  0,  0,  0,  0],
+        [  0,  0,  0,  0,  1,  1,  1,  1],
+        [  1,  0,  0,  0,  0,  3,  3,  1]
+    ]
+\end{lstlisting}
+
+    \noindent Neste caso o vencedor foi o \textit{bot player} dado que conseguiu
+    alcançar a linha mais próxima do oponente com um dos seus \textit{tanks}.
 
     %%% Visualização do estado do jogo %%%
     \subsection{Visualização do estado do jogo}
