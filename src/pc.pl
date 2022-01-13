@@ -27,7 +27,8 @@ evaluate_line(Board, Line, bot, Value):-
     nth0(Line, Board, LineList),
     filter_negatives(LineList, FilteredList),
     apply_tank_value_map(FilteredList, ValueList),
-    list_multiply_scalar(DistanceCovered, ValueList, ScaledValues),
+    Multiplier is 2 ** DistanceCovered,
+    list_multiply_scalar(Multiplier, ValueList, ScaledValues),
     sum_list(ScaledValues, Value).
 
 evaluate_line(Board, Line, top, Value):-
@@ -35,7 +36,9 @@ evaluate_line(Board, Line, top, Value):-
     list_multiply_scalar(-1, LineList, NormalizedList),
     filter_negatives(NormalizedList, FilteredList),
     apply_tank_value_map(FilteredList, ValueList),
-    list_multiply_scalar(Line + 1, ValueList, ScaledValues),
+    DistanceCovered is Line + 1,
+    Multiplier is 2 ** DistanceCovered,
+    list_multiply_scalar(Multiplier, ValueList, ScaledValues),
     sum_list(ScaledValues, Value).
 
 
@@ -91,7 +94,6 @@ choose_move(GameState, 2, Move):-
     valid_moves(GameState, ValidMoves),
     highest_value_move(GameState, ValidMoves, _, Move).
 choose_move(GameState, 1, Move):- 
-    use_module(library(random)), % TODO remove ?
     valid_moves(GameState, ValidMoves),
     length(ValidMoves, Size),
     random(0, Size, RandomIndex),
