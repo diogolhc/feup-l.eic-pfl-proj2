@@ -65,17 +65,15 @@ value(GameState, bot, Value):-
 % best_move(+Move1, +Value1, +Move2, +Value2, -BestMove, -BestValue)
 best_move(Move1, Value1, _Move2, Value2, Move1, Value1):-
     Value1 > Value2.
-best_move(Move1, Value1, Move2, Value2, Move3, Value3):-
-    Value1 == Value2, % TODO shouldn't this go to the prototype with same terms? eg.  best_move(Move1, Value12, Move2, Value12, Move3, Value3)
+best_move(Move1, Value12, Move2, Value12, Move3, Value3):-
     random(0, 2, Res),
-    MoveValueList = [[Move1, Value1], [Move2, Value2]],
+    MoveValueList = [[Move1, Value12], [Move2, Value12]],
     matrix_at(MoveValueList, [0, Res], Move3),
     matrix_at(MoveValueList, [1, Res], Value3).
-best_move(_Move1, _Value1, Move2, Value2, Move2, Value2).
+best_move(_Move1, _Value1, Move2, Value12, Move2, Value12).
 
 
 % highest_value_move(+GameState, +MoveList, -BestValue, -BestMove)
-% TODO show error somehow?
 highest_value_move(Turn-Board, [LastMove], LastMoveValue, LastMove):- 
     do_valid_move(Board, LastMove, ResultBoard),
     value(Turn-ResultBoard, Turn, LastMoveValue).
@@ -85,13 +83,13 @@ highest_value_move(Turn-Board, [CurrentMove | RestMoves], BestValue, BestMove):-
     highest_value_move(Turn-Board, RestMoves, NextValue, NextMove),
     best_move(CurrentMove, CurrentValue, NextMove, NextValue, BestMove, BestValue).
 
+
 % TODO make more similar with example from theoretical class
 % choose_move(+GameState, +Level, -Move)
 choose_move(GameState, 2, Move):- 
     valid_moves(GameState, ValidMoves),
     highest_value_move(GameState, ValidMoves, _, Move).
-choose_move(GameState, 1, Move):- 
-    use_module(library(random)), % TODO remove ?
+choose_move(GameState, 1, Move):-
     valid_moves(GameState, ValidMoves),
     length(ValidMoves, Size),
     random(0, Size, RandomIndex),

@@ -1,6 +1,6 @@
 :- consult('textbeauty.pl').
 
-% TODO maybe choose more distinguished chars:
+
 % code(+Code, -BoardRepresentation)
 code( 0, ' ').
 code( 1, 'M').
