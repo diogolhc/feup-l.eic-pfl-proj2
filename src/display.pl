@@ -4,10 +4,10 @@
 % code(+Code, -BoardRepresentation)
 code( 0, ' ').
 code( 1, 'M').
-code( 2, 'H').
+code( 2, 'T').
 code( 3, 'D').
 code(-1, 'm').
-code(-2, 'h').
+code(-2, 't').
 code(-3, 'd').
 
 

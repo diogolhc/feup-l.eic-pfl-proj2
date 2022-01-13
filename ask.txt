@@ -1,5 +1,0 @@
-1. Representação de movimento pode ficar [[C1,L1],[C2,L2]] ou há melhor forma de representar?
-    - pode
-
-2. Representação letras quais?
-    - alterar o 'H'
