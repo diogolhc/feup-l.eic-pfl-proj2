@@ -34,10 +34,8 @@ make_move(Turn-Board, PlayerType, NewTurn-NewBoard):-
     Given the Players(Type) playing the game, gets the player of the given Turn.
 */
 % get_player(+Turn, +Players, -PlayerType)
-get_player(top, Players, PlayerType):-
-    nth0(0, Players, PlayerType).
-get_player(bot, Players, PlayerType):-
-    nth0(1, Players, PlayerType).
+get_player(top, [PlayerTop, _PlayerBot], PlayerTop).
+get_player(bot, [_PlayerTop, PlayerBot], PlayerBot).
 
 
 /*

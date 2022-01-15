@@ -25,11 +25,10 @@ back_line(Size, BackLine):-
     Gets the initial state of the 2 closest lines to bot player for a given board Size.
 */
 % bot_player_rep(+Size, -Matrix)
-bot_player_rep(Size, Matrix):-
+bot_player_rep(Size, [AllOne, BackLine]):-
     between(6, 26, Size),
     num_line(1, Size, AllOne),
-    back_line(Size, BackLine),
-    append([AllOne], [BackLine], Matrix).
+    back_line(Size, BackLine).
 
 
 /*
