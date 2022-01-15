@@ -201,8 +201,6 @@ top-[
     alcançar a linha mais próxima do oponente com um dos seus \textit{tanks}.
 
     %%% Visualização do estado do jogo %%%
-    % TODO acrescentar cenas de menu (?)
-    % TODO acrescentar que dá para escolher que tipo de jogador é tanto o top como bot...
     \subsection{Visualização do estado do jogo}
 
     Os predicados de visualização do estado de jogo estão definidos no ficheiro
@@ -281,6 +279,40 @@ display_game(Turn-Board):-
     ou minúscula, seguida de um \textit{enter}. Isto permite que o utilizador,
     quando pretende selecionar uma coluna tanto possa escrever com maiúsculas
     como mínusculas.
+
+    
+    \subsubsection{Menu}
+    O menu de jogo tem 3 opções: jogar, ver regras ou sair.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{imgs/main_menu.png}
+        \caption{Menu do jogo.}
+        \label{fig:main_menu}
+    \end{figure}
+
+
+    \noindent Quando se seleciona jogar (\textit{start game}), o utilizador necessita de configurar
+    o tipo de ambos os jogadores (\textit{top} e \textit{bot}), ou seja, necessita de atribuir um tipo a cada um:
+    humano, pc nível 1 ou pc nível 2:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{imgs/start_game.png}
+        \caption{Jogar jogo.}
+        \label{fig:start_game}
+    \end{figure}
+
+
+    \noindent Quando se selecionam as regras (\textit{rules}), elas são apresentadas:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{imgs/rules.png}
+        \caption{Regras do jogo.}
+        \label{fig:game_rules}
+    \end{figure}
+
 
     %%% Execução de jogadas %%%
     \subsection{Execução de jogadas}
