@@ -1,5 +1,5 @@
 :- use_module(library(lists)).
-:- consult('utils.pl').
+:- ensure_loaded('utils.pl').
 
 % 0: empty
 % 1: Medium Tank
