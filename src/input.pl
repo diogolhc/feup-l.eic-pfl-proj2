@@ -1,4 +1,4 @@
-:- consult('utils.pl').
+:- ensure_loaded('utils.pl').
 
 /*
     Reads a number followed by a Line Feed.

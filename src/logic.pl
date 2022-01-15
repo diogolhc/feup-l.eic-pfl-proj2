@@ -1,5 +1,5 @@
 :- use_module(library(lists)).
-:- consult('utils.pl').
+:- ensure_loaded('utils.pl').
 
 
 %% TANK BOT is the standard TANK TYPE representation 

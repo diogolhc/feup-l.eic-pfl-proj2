@@ -1,10 +1,10 @@
-:- consult('representation.pl').
-:- consult('display.pl').
-:- consult('input.pl').
-:- consult('logic.pl').
-:- consult('pc.pl').
-:- consult('utils.pl').
-:- consult('textbeauty.pl').
+:- ensure_loaded('representation.pl').
+:- ensure_loaded('display.pl').
+:- ensure_loaded('input.pl').
+:- ensure_loaded('logic.pl').
+:- ensure_loaded('pc.pl').
+:- ensure_loaded('utils.pl').
+:- ensure_loaded('textbeauty.pl').
 
 
 % Players is [top, bot]

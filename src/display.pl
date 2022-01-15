@@ -1,5 +1,5 @@
-:- consult('textbeauty.pl').
-:- consult('representation.pl').
+:- ensure_loaded('textbeauty.pl').
+:- ensure_loaded('representation.pl').
 
 /*
     Display char of each tank and empty space.
