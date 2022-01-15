@@ -23,8 +23,6 @@ print_text(Text, Symbol, Padding):-
     put_char(Symbol).
 
 
-%% TODO maybe remove Text from print_top_banner/3 and print_mid_banner/3 and use the atom_length as argument
-
 /*
     Prints the top (and bot) part of the banner.
 */
@@ -38,7 +36,7 @@ print_top_banner(Text, Symbol, Padding):-
 
 
 /*
-    Prints the mid part (with no text) of the banner.
+    Prints the mid part of the banner.
 */
 % print_mid_banner(+Text, +Symbol, +Padding)
 print_mid_banner(Text, Symbol, Padding):-
