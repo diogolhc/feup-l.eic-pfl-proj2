@@ -1,7 +1,9 @@
 :- consult('textbeauty.pl').
 :- consult('representation.pl').
 
-
+/*
+    Display char of each tank and empty space.
+*/
 % code(+Code, -BoardRepresentation)
 code( 0, ' ').
 code( 1, 'M').
@@ -12,6 +14,10 @@ code(-2, 't').
 code(-3, 'd').
 
 
+/*
+    Prints a given number.
+    If the number has only a digit, prints a leading space.
+*/
 % print_number(+Number)
 print_number(Number):-
     Number > 9,
@@ -22,8 +28,12 @@ print_number(Number):-
     write(Number).
 
 
+/*
+    Given a number, prints its corresponding uppercase letter.
+    Eg. 0 -> 'A'
+        1 -> 'B'
+*/
 % print_upper_letter(+LetterOrder)
-% 0 => 'A'
 print_upper_letter(LetterOrder):-
     char_code('A', AUpperAscii),
     AsciiCode is AUpperAscii + LetterOrder,
@@ -35,6 +45,10 @@ print_left_padding:-
     write('     ').
 
 
+/*
+    Prints Board's columns letters.
+*/
+% print_nav_horizontal(+Size, +Size)
 print_nav_horizontal(Size, Size):-
     nl,
     nl.
@@ -52,6 +66,9 @@ print_nav_horizontal(Size):-
     print_nav_horizontal(Size, 0).
 
 
+/*
+    Prints Board's horizontal separator between cells.
+*/
 % print_board_horizontal_separator(+Size)
 print_board_horizontal_separator(0):-
     write('+'),
@@ -62,6 +79,9 @@ print_board_horizontal_separator(Size):-
     print_board_horizontal_separator(S1).
 
 
+/*
+    Prints Board's cell Line.
+*/
 % print_board_line(+Line, +Number)
 print_board_line([], Number):-
     write('|  '),
@@ -75,6 +95,9 @@ print_board_line([H|T], Number):-
     print_board_line(T, Number).
 
 
+/*
+    Prints a given Board.
+*/
 % print_board(+Board, +Size, +CurrentLine)
 print_board([], Size, 0):-
     print_left_padding,
@@ -100,6 +123,9 @@ print_board(Board):-
     print_nav_horizontal(Size).
 
 
+/*
+    Prints the given GameState.
+*/
 % display_game(+GameState)
 display_game(Turn-Board):-
     print_board(Board),
@@ -134,6 +160,9 @@ congratulate(Winner):-
     write(', you have WON!\n').
 
 
+/*
+    Displays the game rules.
+*/
 view_rules:-
     nl,
     print_game_banner('RULES'),

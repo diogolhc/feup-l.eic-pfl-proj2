@@ -1,5 +1,9 @@
 :- consult('utils.pl').
 
+/*
+    Reads a number followed by a Line Feed.
+    The number can have more than a digit.
+*/
 % read_number(-Number)
 read_number(Number):-
     read_number(Number, 0).
@@ -18,6 +22,10 @@ read_number(Number, _):-
     skip_line, !, read_number(Number, 0).
 
 
+/*
+    Reads a single letter, upper or lower case, and returns
+    its ascii code.
+*/
 % read_letter(-LetterCode)
 read_letter(LetterCode):-
     get_code(Code),
@@ -35,6 +43,12 @@ read_letter(LetterCode):-
     skip_line, !, read_letter(LetterCode).
 
 
+/*
+    Given an ASCII code, Code, gets the corresponding index.
+    Eg. 65 -> 0 (A -> 0)
+        66 -> 1 (B -> 1)
+        97 -> 0 (a -> 0)
+*/
 % letter_code_to_index(+Code, -Index)
 letter_code_to_index(Code, Index):- % lower case
     char_code('a', ALowerAscii),
@@ -48,6 +62,9 @@ letter_code_to_index(Code, Index):- % upper case
     Index is Code - AUpperAscii.
 
 
+/*
+    Reads a row index inside Board bounds.
+*/
 % read_valid_row_index(+Size, -RowIndex) 
 read_valid_row_index(Size, RowIndex):-
     read_number(RowNumber),
@@ -60,6 +77,9 @@ read_valid_row_index(Size, RowIndex):-
     read_valid_row_index(Size, RowIndex).
 
 
+/*
+    Reads a column index inside Board bounds.
+*/
 % read_valid_column_index(+Size, -ColumnIndex)
 read_valid_column_index(Size, ColumnIndex):-
     read_letter(LetterCode),
@@ -72,6 +92,9 @@ read_valid_column_index(Size, ColumnIndex):-
     read_valid_column_index(Size, ColumnIndex).
 
 
+/*
+    Reads Board coordinates inside Board bounds.
+*/
 % read_coords(+Size, -ColumnIndex, -RowIndex)
 read_coords(Size, ColumnIndex, RowIndex):-
     write('Col ? '),
@@ -80,6 +103,9 @@ read_coords(Size, ColumnIndex, RowIndex):-
     read_valid_row_index(Size, RowIndex).
 
 
+/*
+    Reads a movement (2 Board coordinates) inside Board bounds.
+*/
 % read_move(+Size, -Move):-
 read_move(Size, [[C1,L1], [C2,L2]]):-
     write('Insert source:\n'),
@@ -89,12 +115,21 @@ read_move(Size, [[C1,L1], [C2,L2]]):-
     !.
 
 
+/*
+    Valid player types.
+    0 -> human player
+    1 -> PC level 1
+    2 -> PC level 2
+*/
 % valid_player(?Player)
 valid_player(0).
 valid_player(1).
 valid_player(2).
 
 
+/*
+    Reads a valid player type.
+*/
 % ask_for_player(-Player)
 ask_for_player(Player):-
     write('Choose player type\n'),
@@ -105,6 +140,9 @@ ask_for_player(Player):-
     ask_for_player(Player).
 
 
+/*
+    Reads 2 valid player types.
+*/
 % read_player_types(-Players)
 read_player_types([Player1, Player2]):-
     write('Choose the type of each player:\n'),
@@ -118,6 +156,10 @@ read_player_types([Player1, Player2]):-
     write('Players configurated!\n').
 
 
+/*
+    Reads a valid Board size.
+    Valid -> even in [6,26]
+*/
 % read_board_size(-BoardSize)
 read_board_size(BoardSize):-
     write('Even integer in range 6-26\n'),

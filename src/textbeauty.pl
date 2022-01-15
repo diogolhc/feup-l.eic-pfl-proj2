@@ -1,3 +1,6 @@
+/*
+    Prints N times the S char.
+*/
 % print_n(+S, +N)
 print_n(S, 1):-
     put_char(S).
@@ -8,6 +11,9 @@ print_n(S, N):-
     print_n(S, N1).
 
 
+/*
+    Prints the given Text surrounded by space Padding and a Symbol on each side.
+*/
 % print_text(+Text, +Symbol, +Padding)
 print_text(Text, Symbol, Padding):-
     put_char(Symbol),
@@ -17,6 +23,11 @@ print_text(Text, Symbol, Padding):-
     put_char(Symbol).
 
 
+%% TODO maybe remove Text from print_top_banner/3 and print_mid_banner/3 and use the atom_length as argument
+
+/*
+    Prints the top (and bot) part of the banner.
+*/
 % print_top_banner(+Text, +Symbol, +Padding)
 print_top_banner(Text, Symbol, Padding):-
     Y1 is Padding * 2,
@@ -26,6 +37,9 @@ print_top_banner(Text, Symbol, Padding):-
     print_n(Symbol, Y3).
 
 
+/*
+    Prints the mid part (with no text) of the banner.
+*/
 % print_mid_banner(+Text, +Symbol, +Padding)
 print_mid_banner(Text, Symbol, Padding):-
     Y1 is Padding * 2,
@@ -36,19 +50,21 @@ print_mid_banner(Text, Symbol, Padding):-
     put_char(Symbol).
 
 
+/*
+    Prints a banner with given Text, border Symbol and space Padding.
+*/
 % print_banner(+Text, +Symbol, +Padding)
 print_banner(Text, Symbol, Padding):-
-    print_top_banner(Text, Symbol, Padding),
-    nl,
-    print_mid_banner(Text, Symbol, Padding),
-    nl,
-    print_text(Text, Symbol, Padding),
-    nl,
-    print_mid_banner(Text, Symbol, Padding),
-    nl,
+    print_top_banner(Text, Symbol, Padding), nl,
+    print_mid_banner(Text, Symbol, Padding), nl,
+    print_text(Text, Symbol, Padding), nl,
+    print_mid_banner(Text, Symbol, Padding), nl,
     print_top_banner(Text, Symbol, Padding).
 
 
+/*
+    Prints the game banner with the given Text.
+*/
 % print_game_banner(+Text)
 print_game_banner(Text):-
     atom_length(Text, TextSize),

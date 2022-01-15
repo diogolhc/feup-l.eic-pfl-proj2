@@ -7,6 +7,9 @@
 % 3: Tank destroyer
 
 
+/*
+    Gets the initial state of the closest line/row (BackLine) to bot player for a given board Size.
+*/
 % back_line(+Size, -BackLine)
 back_line(Size, BackLine):-
     between(6, 26, Size),
@@ -18,6 +21,9 @@ back_line(Size, BackLine):-
     append(Temp3, [1], BackLine).
 
 
+/*
+    Gets the initial state of the 2 closest lines to bot player for a given board Size.
+*/
 % bot_player_rep(+Size, -Matrix)
 bot_player_rep(Size, Matrix):-
     between(6, 26, Size),
@@ -26,12 +32,19 @@ bot_player_rep(Size, Matrix):-
     append([AllOne], [BackLine], Matrix).
 
 
+/*
+    Gets the initial state of the 2 closest lines to top player, given
+    the the 2 closest lines to bot player.
+*/
 % mirror_rep(+Matrix, -MirrorMatrix)
 mirror_rep(Matrix, MirrorMatrix):-
     reverse(Matrix, TempMatrix),
     matrix_multiply_scalar(-1, TempMatrix, MirrorMatrix).
 
 
+/*
+    Gets a Board with the given Size after validating it.
+*/
 % get_initial_board(+Size, -Board)
 get_initial_board(Size, Board):-
     between(6, 26, Size),
@@ -44,9 +57,12 @@ get_initial_board(Size, Board):-
     append(Temp, MatrixBot, Board).
 
 
-% minimim Size = 6 and must be even
+/*
+    Gets th initial GameState for a given board Size, if Size is valid.
+    Valid: even in [6,26]
+*/
 % initial_state(+Size, -GameState)
-initial_state(Size, bot-Board):- % bot plays goes first                                     
+initial_state(Size, bot-Board):- % bot player goes first                                     
     between(6, 26, Size),
     even(Size),
     get_initial_board(Size, Board).
